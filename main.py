@@ -15,6 +15,19 @@ app = Flask(__name__)
 
 BASE_PATH = os.getenv("BASE_PATH", "")
 
+
+def _parse_scale(raw: str, default: float = 0.75) -> float:
+    try:
+        val = float(raw)
+        if 0.1 <= val <= 2.0:
+            return val
+    except (TypeError, ValueError):
+        pass
+    return default
+
+
+PDF_SCALE = _parse_scale(os.getenv("PDF_SCALE", "0.75"))
+
 _lock = threading.Lock()
 _playwright = None
 _browser = None
@@ -95,7 +108,7 @@ def _render_with_chromium(html_content: str, footer_template: str | None = None,
 
             pdf_kwargs = {
                 "format": "A4",
-                "scale": 0.85,
+                "scale": PDF_SCALE,
                 "print_background": True,
                 "margin": {"top": "14mm", "bottom": "16mm", "left": "14mm", "right": "14mm"},
             }

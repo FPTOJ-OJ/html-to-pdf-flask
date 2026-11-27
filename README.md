@@ -44,7 +44,7 @@ directory=/home/kien/html-to-pdf-flask
 stopsignal=TERM
 stopasgroup=true
 killasgroup=true
-environment=BASE_PATH="/home/kien/site",PLAYWRIGHT_BROWSERS_PATH="/home/kien/.cache/ms-playwright"
+environment=BASE_PATH="/home/kien/site",PLAYWRIGHT_BROWSERS_PATH="/home/kien/.cache/ms-playwright",PDF_SCALE="0.75"
 stdout_logfile=/home/kien/site/logs/html-to-pdf-flask_log.log
 stderr_logfile=/home/kien/site/logs/html-to-pdf-flask.log
 autorestart=true
@@ -61,6 +61,7 @@ sudo supervisorctl restart html-to-pdf-flask
 **Lưu ý biến môi trường:**
 - `BASE_PATH`: Thư mục gốc của FPTOJ Site (ví dụ `/home/kien/site`). Các đường dẫn tương đối như `/static/...`, `/userdata/...` sẽ được tự động ánh xạ sang `file://<BASE_PATH>/...` để Chromium nạp CSS/JS/font/SVG trực tiếp từ đĩa.
 - `PLAYWRIGHT_BROWSERS_PATH`: Đường dẫn chứa trình duyệt Chromium của Playwright (rất cần thiết nếu Supervisor chạy dưới user khác user đã cài `playwright install chromium`).
+- `PDF_SCALE`: Tỷ lệ thu phóng khi xuất PDF (`0.1` – `2.0`, mặc định `0.75` tức `75%`).
 
 ---
 
