@@ -1,5 +1,4 @@
 import argparse
-import pdfkit
 import base64
 import sys
 import traceback
@@ -7,12 +6,9 @@ import os
 import re
 from bs4 import BeautifulSoup
 from flask import Flask, request, jsonify
+from weasyprint import HTML
 
 app = Flask(__name__)
-
-options = {
-    "enable-local-file-access": None
-}
 
 BASE_PATH = os.getenv("BASE_PATH", "")
 
@@ -51,7 +47,7 @@ def create_pdf():
             return jsonify({"success": False, "message": "Missing required parameters"}), 400
 
         html_content = rewrite_html_paths(html_content)
-        pdf_output = pdfkit.from_string(html_content, False,options=options)
+        pdf_output = HTML(string=html_content, base_url=BASE_PATH or "/").write_pdf()
 
         if pdf_output:
             pdf_base64 = base64.b64encode(pdf_output).decode('utf-8')
