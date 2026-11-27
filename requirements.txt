@@ -1,3 +1,4 @@
 weasyprint
+latex2mathml
 flask
 bs4
