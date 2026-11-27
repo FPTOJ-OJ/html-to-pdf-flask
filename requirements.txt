@@ -1,4 +1,3 @@
-weasyprint
-latex2mathml
+playwright
 flask
 bs4
