@@ -95,6 +95,7 @@ def _render_with_chromium(html_content: str, footer_template: str | None = None,
 
             pdf_kwargs = {
                 "format": "A4",
+                "scale": 0.85,
                 "print_background": True,
                 "margin": {"top": "14mm", "bottom": "16mm", "left": "14mm", "right": "14mm"},
             }
